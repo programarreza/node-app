@@ -58,7 +58,15 @@ jobs:
       - name: Print EC2_HOST without masking
         run: echo $EC2_HOST
         env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_HOST:
+            ${{ secrets.EC2_HOST }}
+            # Create .env file and append APP_ENVS
+      - name: Create and append .env file
+        run: |
+          echo "$APP_ENVS" > .env
+          cat .env
+        env:
+          APP_ENVS: ${{ secrets.APP_ENVS }}
 
       # Deploy to EC2
       - name: Deploy to EC2
