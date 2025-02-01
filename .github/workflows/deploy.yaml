@@ -54,6 +54,10 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
+      # Debugging step to print EC2_HOST
+      - name: Print EC2_HOST
+        run: echo ${{ secrets.EC2_HOST }}
+
       # Deploy to EC2
       - name: Deploy to EC2
         env:
